@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
+	"os"
 
 	"winkedIn/handlerFunctions"
 
@@ -9,6 +11,15 @@ import (
 
 	"github.com/gorilla/mux"
 )
+
+func GetPort() string {
+	var port = os.Getenv("PORT")
+	if port == "" {
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to 4000")
+		return ":3000"
+	}
+	return ":" + port
+}
 
 func main() {
 	r := mux.NewRouter()
@@ -21,7 +32,7 @@ func main() {
 	r.HandleFunc("/login", handlerFunctions.LoginUser).Methods("POST")
 
 	r.HandleFunc("/api", api)
-	http.ListenAndServe("winkedinapi.herokuapp.com", handlers.CORS(corsObj)(r))
+	http.ListenAndServe(GetPort(), handlers.CORS(corsObj)(r))
 }
 func api(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello API"))
