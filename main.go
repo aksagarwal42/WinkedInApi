@@ -21,7 +21,7 @@ func main() {
 	r.HandleFunc("/login", handlerFunctions.LoginUser).Methods("POST")
 
 	r.HandleFunc("/api", api)
-	http.ListenAndServe("winkedinapi.herokuapp.com:80", handlers.CORS(corsObj)(r))
+	http.ListenAndServe("winkedinapi.herokuapp.com", handlers.CORS(corsObj)(r))
 }
 func api(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello API"))
