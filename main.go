@@ -15,7 +15,7 @@ import (
 func GetPort() string {
 	var port = os.Getenv("PORT")
 	if port == "" {
-		fmt.Println("INFO: No PORT environment variable detected, defaulting to 4000")
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to 3000")
 		return ":3000"
 	}
 	return ":" + port
@@ -36,4 +36,5 @@ func main() {
 }
 func api(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello API"))
+	w.Write([]byte("\nPort: " + GetPort()))
 }
