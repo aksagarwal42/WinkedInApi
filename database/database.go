@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 
@@ -14,7 +15,8 @@ func InitDB() (*mongo.Database, context.Context) {
 	// Establish a connection to database
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		// log.Fatal("Error loading .env file")
+		fmt.Printf("Error")
 	}
 	mongoUrl := os.Getenv("MONGO_URL")
 	ctx := context.Background()
