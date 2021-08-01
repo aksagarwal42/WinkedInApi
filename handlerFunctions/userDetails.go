@@ -58,6 +58,10 @@ func ExplorerUserDetails(w http.ResponseWriter, r *http.Request) {
 	// Decoding all users and storing it in user struct
 	profileCursor.All(ctx, &user)
 
+	for i := range user {
+		user[i].DOB = user[i].DOB[6:]
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 
 	json.NewEncoder(w).Encode(user)
